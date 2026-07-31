@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的导航</title>
+  <meta name="description" content="一个可自定义的上网导航站，支持分类管理、搜索引擎切换，配置保存在本地缓存中。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 顶部：站点标题 + 操作按钮 -->
+  <header class="header">
+    <div class="header-bar">
+      <div class="logo" id="siteTitle">🧭 我的导航</div>
+      <div class="header-right">
+        <div class="today" id="today"></div>
+        <div class="header-actions">
+          <button class="btn icon-btn" id="themeToggle" title="切换主题">🌙</button>
+          <button class="btn icon-btn" id="settingsBtn" title="设置">⚙️</button>
+          <button class="btn icon-btn edit-btn" id="editToggle" title="编辑模式">✏️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 搜索区 -->
+    <div class="search-area">
+      <div class="search-box">
+        <div class="engine-select" id="engineSelect" tabindex="0">
+          <span class="engine-current" id="engineName">百度</span>
+          <span class="caret">▾</span>
+          <ul class="engine-menu" id="engineMenu"></ul>
+        </div>
+        <input type="text" id="searchInput" placeholder="输入关键词，回车搜索" autocomplete="off">
+        <button class="btn primary-btn" id="searchBtn">搜索</button>
+      </div>
+      <div class="quick-engines" id="quickEngines"></div>
+    </div>
+  </header>
+
+  <!-- 分类导航主体 -->
+  <main id="main"></main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <p id="footerText">本站导航配置保存在浏览器本地缓存中，点击右上角 ✏️ 可自定义分类与链接。</p>
+  </footer>
+
+  <!-- 链接 新增/编辑 弹窗 -->
+  <div class="modal-mask hidden" id="linkModal">
+    <div class="modal">
+      <div class="modal-title" id="linkFormTitle">添加链接</div>
+      <label class="field">
+        <span>名称</span>
+        <input type="text" id="linkName" placeholder="例如：百度">
+      </label>
+      <label class="field">
+        <span>网址</span>
+        <input type="text" id="linkUrl" placeholder="https://www.example.com">
+      </label>
+      <label class="field">
+        <span>描述（可选）</span>
+        <input type="text" id="linkDesc" placeholder="一句话说明">
+      </label>
+      <label class="field">
+        <span>所属分类</span>
+        <select id="linkCategory"></select>
+      </label>
+      <div class="modal-actions">
+        <button class="btn" data-close>取消</button>
+        <button class="btn primary-btn" id="linkSave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增分类 弹窗 -->
+  <div class="modal-mask hidden" id="categoryModal">
+    <div class="modal">
+      <div class="modal-title">新增分类</div>
+      <label class="field">
+        <span>分类名称</span>
+        <input type="text" id="categoryName" placeholder="例如：工作">
+      </label>
+      <div class="modal-actions">
+        <button class="btn" data-close>取消</button>
+        <button class="btn primary-btn" id="categorySave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 设置 弹窗 -->
+  <div class="modal-mask hidden" id="settingsModal">
+    <div class="modal">
+      <div class="modal-title">设置</div>
+      <label class="field">
+        <span>站点名称</span>
+        <input type="text" id="setTitle" placeholder="我的导航">
+      </label>
+      <label class="field">
+        <span>默认搜索引擎</span>
+        <select id="setEngine"></select>
+      </label>
+      <label class="field">
+        <span>主题</span>
+        <select id="setTheme">
+          <option value="light">浅色</option>
+          <option value="dark">深色</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>热点资讯</span>
+        <select id="setNews">
+          <option value="on">开启</option>
+          <option value="off">关闭</option>
+        </select>
+      </label>
+      <div class="setting-actions">
+        <button class="btn" id="btnExport">导出配置</button>
+        <button class="btn" id="btnImport">导入配置</button>
+        <input type="file" id="importFile" accept=".json,application/json" class="hidden">
+      </div>
+      <div class="modal-actions">
+        <button class="btn" data-close>关闭</button>
+        <button class="btn danger-btn" id="btnReset">恢复默认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 轻提示 -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

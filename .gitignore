@@ -1,0 +1,26 @@
+# ---- 操作系统文件 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 编辑器 / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---- 日志 ----
+*.log
+npm-debug.log*
+
+# ---- Node（若后续引入构建工具） ----
+node_modules/
+
+# ---- 构建产物 ----
+dist/
+build/
+
+# ---- 本地冒烟测试脚本（回归验证用，不入库） ----
+.smoke-test.cjs
+Task.md
